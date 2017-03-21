@@ -39,36 +39,38 @@
     [self configRandomView];
 }
 
+- (NumberTransformationView *)transformationViewWithFrame:(CGRect)frame {
+    NumberTransformationView *view = [[NumberTransformationView alloc] initWithFrame:frame font:[UIFont systemFontOfSize:18]];
+    view.layer.borderColor = [UIColor colorWithRed:170 / 255.0 green:170 / 255.0 blue:170 / 255.0 alpha:1].CGColor;
+    view.layer.borderWidth = 1;
+    view.layer.cornerRadius = 5;
+    return view;
+}
+
 - (void)configAddView {
-    _addView = [[NumberTransformationView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_addButton.frame) + 80, _addButton.frame.origin.y + 5, 150, _addButton.frame.size.height-10) font:[UIFont systemFontOfSize:18]];
+    _addView = [self transformationViewWithFrame:CGRectMake(CGRectGetMaxX(_addButton.frame) + 80, _addButton.frame.origin.y + 5, 150, _addButton.frame.size.height-10)];
+    
     _addView.alignment = NSTextAlignmentCenter;
-    _addView.layer.cornerRadius = 5;
-    _addView.textMargin = 15;
-    _addView.layer.borderColor = [UIColor colorWithRed:170 / 255.0 green:170 / 255.0 blue:170 / 255.0 alpha:1].CGColor;
-    _addView.layer.borderWidth = 1;
+    _addView.textMargin = 10;
     _addView.numberValue = @(1);
     _addView.contentEdgeInsets = UIEdgeInsetsMake(0, 15, 0, 0);
     [self.view addSubview:_addView];
 }
 
 - (void)configSubtractView {
-    _subtractView = [[NumberTransformationView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_subtractBtn.frame) + 80, _subtractBtn.frame.origin.y + 5, 150, _subtractBtn.frame.size.height - 10) font:[UIFont systemFontOfSize:18]];
+    _subtractView = [self transformationViewWithFrame:CGRectMake(CGRectGetMaxX(_subtractBtn.frame) + 80, _subtractBtn.frame.origin.y + 5, 150, _subtractBtn.frame.size.height - 10)];
     _subtractView.alignment = NSTextAlignmentCenter;
-    _subtractView.layer.cornerRadius = 5;
-    _subtractView.layer.borderColor = [UIColor colorWithRed:170 / 255.0 green:170 / 255.0 blue:170 / 255.0 alpha:1].CGColor;
-    _subtractView.layer.borderWidth = 1;
+    _addView.textMargin = -2;
     _subtractView.numberValue = @(100);
     _subtractView.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 15);
     [self.view addSubview:_subtractView];
 }
 
 - (void)configRandomView {
-    _randomView = [[NumberTransformationView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_randomBtn.frame) + 80, _randomBtn.frame.origin.y + 5, 150, _randomBtn.frame.size.height - 10) font:[UIFont systemFontOfSize:18]];
+    _randomView = [self transformationViewWithFrame:CGRectMake(CGRectGetMaxX(_randomBtn.frame) + 80, _randomBtn.frame.origin.y + 5, 150, _randomBtn.frame.size.height - 10)];
     _randomView.alignment = NSTextAlignmentCenter;
-    _randomView.layer.cornerRadius = 5;
-    _randomView.layer.borderColor = [UIColor colorWithRed:170 / 255.0 green:170 / 255.0 blue:170 / 255.0 alpha:1].CGColor;
-    _randomView.layer.borderWidth = 1;
     _randomView.numberValue = @(99);
+    _randomView.contentEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 10);
     [self.view addSubview:_randomView];
 }
 
@@ -110,22 +112,27 @@
     _randomView.numberValue = @(numberString.floatValue);
 }
 
-- (IBAction)changeToAligmentLeft:(id)sender {
-    _addView.alignment = NSTextAlignmentLeft;
-    _subtractView.alignment = NSTextAlignmentLeft;
-    _randomView.alignment = NSTextAlignmentLeft;
-}
-
-- (IBAction)changeToAligmentRight:(id)sender {
-    _addView.alignment = NSTextAlignmentRight;
-    _subtractView.alignment = NSTextAlignmentRight;
-    _randomView.alignment = NSTextAlignmentRight;
-}
-
-- (IBAction)changeToAligmentCenter:(id)sender {
-    _addView.alignment = NSTextAlignmentCenter;
-    _subtractView.alignment = NSTextAlignmentCenter;
-    _randomView.alignment = NSTextAlignmentCenter;
+- (IBAction)changeAlignment:(id)sender {
+    NSTextAlignment aligment;
+    switch (((UISegmentedControl *)sender).selectedSegmentIndex) {
+        case 0:
+            aligment = NSTextAlignmentLeft;
+            break;
+        case 1:
+            aligment = NSTextAlignmentCenter;
+            break;
+        case 2:
+            aligment = NSTextAlignmentRight;
+            break;
+            
+        default:
+            break;
+    }
+    
+    
+    _addView.alignment = aligment;
+    _subtractView.alignment = aligment;
+    _randomView.alignment = aligment;
 }
 
 

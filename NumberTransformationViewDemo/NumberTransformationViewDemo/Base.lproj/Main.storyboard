@@ -21,30 +21,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fYB-Xf-bi5">
-                                <rect key="frame" x="119" y="384" width="137" height="36"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="NSTextAligmentLeft"/>
-                                <connections>
-                                    <action selector="changeToAligmentLeft:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fdu-No-okF"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o6f-sL-WpB">
-                                <rect key="frame" x="115" y="442" width="146" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="NSTextAligmentRight"/>
-                                <connections>
-                                    <action selector="changeToAligmentRight:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iVm-6g-92A"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O9F-wT-OLM">
-                                <rect key="frame" x="109" y="498" width="157" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="NSTextAligmentCenter"/>
-                                <connections>
-                                    <action selector="changeToAligmentCenter:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7Do-bb-AGV"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wcg-Rf-u9R">
                                 <rect key="frame" x="0.0" y="103" width="90" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -69,14 +45,23 @@
                                     <action selector="startRandoming:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jjz-EP-6Mx"/>
                                 </connections>
                             </button>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="xf4-wA-wM6">
+                                <rect key="frame" x="58" y="395" width="259" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="Left"/>
+                                    <segment title="Center"/>
+                                    <segment title="Right"/>
+                                </segments>
+                                <connections>
+                                    <action selector="changeAlignment:" destination="BYZ-38-t0r" eventType="valueChanged" id="K5b-fL-YwO"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
                         <outlet property="addButton" destination="wcg-Rf-u9R" id="HbA-Ab-xoq"/>
-                        <outlet property="aligmentCenterBtn" destination="O9F-wT-OLM" id="Uwe-e9-9a2"/>
-                        <outlet property="aligmentLeftBtn" destination="fYB-Xf-bi5" id="Hef-fO-eJv"/>
-                        <outlet property="aligmentRightBtn" destination="o6f-sL-WpB" id="DYm-TW-2Uw"/>
                         <outlet property="randomBtn" destination="zi3-hD-5Ha" id="1xp-iF-FP7"/>
                         <outlet property="subtractBtn" destination="KaU-RG-kzO" id="1p1-1q-6l7"/>
                     </connections>

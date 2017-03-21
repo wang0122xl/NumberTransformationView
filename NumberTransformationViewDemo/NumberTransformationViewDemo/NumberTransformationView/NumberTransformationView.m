@@ -56,7 +56,7 @@ CGFloat kAnimationNumberLabel_eachWidth;
         TextTransformationLayer *textLayer = [TextTransformationLayer layer];
         textLayer.frame = CGRectMake(lastX - i * kAnimationNumberLabel_eachWidth, 0, kAnimationNumberLabel_eachWidth, self.bounds.size.height);
        
-        [textLayer setTextArray:@[@".",@"0",@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9"] font:_font textColor:_textColor selectText:@"0"];
+        [textLayer setTextArray:@[@".",@"0",@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9"] font:_font textColor:_textColor selectText:nil];
         [_scrollLayers addObject:textLayer];
         
         [self.layer addSublayer:textLayer];
@@ -66,7 +66,19 @@ CGFloat kAnimationNumberLabel_eachWidth;
     for (NSInteger i = 0; i<_scrollLayers.count; i++) {
         TextTransformationLayer *layer = _scrollLayers[i];
         layer.frame = CGRectMake(lastX - i * kAnimationNumberLabel_eachWidth - _textMargin * i, 0, kAnimationNumberLabel_eachWidth, self.bounds.size.height);
-        layer.selectText = [numberValue.description substringWithRange:NSMakeRange(_scrollLayers.count - i - 1, 1)];
+        
+        BOOL animated;
+        NSString *newStr = [numberValue.description substringWithRange:NSMakeRange(_scrollLayers.count - i - 1, 1)];
+
+        if (i<_numberValue.description.length) {
+            NSString *curStr = [_numberValue.description substringWithRange:NSMakeRange(_numberValue.description.length - i - 1, 1)];
+            animated = (abs(newStr.intValue - curStr.intValue) < 9);
+        } else {
+            animated = NO;
+        }
+        
+        animated = (animated && layer.selectText);
+        [layer setSelectText:newStr animated:animated];;
     }
 }
 

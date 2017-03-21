@@ -38,21 +38,26 @@
         [_labels addObject:label];
     }
     
-    self.selectText = selectText;
+    [self setSelectText:selectText animated:NO];
 }
 
-- (void)setSelectText:(NSString *)selectText {
+- (void)setSelectText:(NSString *)selectText animated:(BOOL)animated {
+    
     CABasicAnimation *anim = [CABasicAnimation animationWithKeyPath:@"sublayerTransform.translation.y"];
-    anim.duration = 0.5;
+    if (animated) {
+        anim.duration = 0.5;
+    } else {
+        anim.duration = 0.01;
+    }
     
     anim.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
     anim.removedOnCompletion = NO;
     anim.fillMode = kCAFillModeForwards;
     anim.fromValue = @(-self.bounds.size.height * [_textArr indexOfObject:_selectText ? _selectText : _textArr[0]]);
     anim.toValue = @(-self.bounds.size.height * [_textArr indexOfObject:selectText]);
-
+    
     [self addAnimation:anim forKey:@"animation"];
-
+    
     _selectText = selectText;
 }
 
