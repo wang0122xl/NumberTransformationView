@@ -24,9 +24,11 @@
     if (!_labels) {
         _labels = [NSMutableArray array];
     }
+    
     for (UILabel *label in _labels) {
         [label.layer removeFromSuperlayer];
     }
+    [_labels removeAllObjects];
     
     for (NSString *text in textArr) {
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, self.bounds.size.height * [textArr indexOfObject:text], self.bounds.size.width, self.bounds.size.height)];
@@ -38,7 +40,12 @@
         [_labels addObject:label];
     }
     
+    //初次设置 , 不需要动画
     [self setSelectText:selectText animated:NO];
+}
+
+- (void)setSelectText:(NSString *)selectText {
+    [self setSelectText:selectText animated:YES];
 }
 
 - (void)setSelectText:(NSString *)selectText animated:(BOOL)animated {

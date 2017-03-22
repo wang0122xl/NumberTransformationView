@@ -39,14 +39,6 @@
     [self configRandomView];
 }
 
-- (NumberTransformationView *)transformationViewWithFrame:(CGRect)frame {
-    NumberTransformationView *view = [[NumberTransformationView alloc] initWithFrame:frame font:[UIFont systemFontOfSize:18]];
-    view.layer.borderColor = [UIColor colorWithRed:170 / 255.0 green:170 / 255.0 blue:170 / 255.0 alpha:1].CGColor;
-    view.layer.borderWidth = 1;
-    view.layer.cornerRadius = 5;
-    return view;
-}
-
 - (void)configAddView {
     _addView = [self transformationViewWithFrame:CGRectMake(CGRectGetMaxX(_addButton.frame) + 80, _addButton.frame.origin.y + 5, 150, _addButton.frame.size.height-10)];
     
@@ -74,7 +66,17 @@
     [self.view addSubview:_randomView];
 }
 
+#pragma mark - tools
+- (NumberTransformationView *)transformationViewWithFrame:(CGRect)frame {
+    NumberTransformationView *view = [[NumberTransformationView alloc] initWithFrame:frame font:[UIFont systemFontOfSize:18]];
+    view.layer.borderColor = [UIColor colorWithRed:170 / 255.0 green:170 / 255.0 blue:170 / 255.0 alpha:1].CGColor;
+    view.layer.borderWidth = 1;
+    view.layer.cornerRadius = 5;
+    return view;
+}
+
 #pragma mark - getter
+//控制递增的timer
 - (NSTimer *)addTimer {
     if (_addTimer) {
         return _addTimer;
@@ -85,6 +87,7 @@
     return _addTimer;
 }
 
+//控制递减的timer
 - (NSTimer *)subtractTimer {
     if (_subtractTimer) {
         return _subtractTimer;
@@ -96,7 +99,6 @@
 }
 
 #pragma mark - actions
-
 - (IBAction)startAdding:(id)sender {
     [self.addTimer fire];
 }
@@ -112,6 +114,7 @@
     _randomView.numberValue = @(numberString.floatValue);
 }
 
+//改变对齐方式
 - (IBAction)changeAlignment:(id)sender {
     NSTextAlignment aligment;
     switch (((UISegmentedControl *)sender).selectedSegmentIndex) {

@@ -24,9 +24,16 @@
            textColor:(UIColor *)textColor
           selectText:(NSString *)selectText;
 
-//当前显示的text
-@property (nonatomic, copy , readonly) NSString *selectText;
+////当前显示的text , setter方法 -- setSelectText:animated:YES
+@property (nonatomic, copy) NSString *selectText;
 
+
+/**
+ 改变选中文字
+
+ @param selectText 要选中的文字
+ @param animated 是否需要动画显示
+ */
 - (void)setSelectText:(NSString *)selectText animated:(BOOL)animated;
 
 @end
